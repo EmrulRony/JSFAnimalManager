@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+
+<h:body>
+<h:body>
+	<h:form>
+		<h:dataTable value="#{animalController.animalList}" var="animal">
+			<h:column>
+			#{animal.animalid}
+			<f:facet name="header">AnimalId</f:facet>
+			</h:column>
+			<h:column>
+			<f:facet name="header">AnimalName</f:facet>
+			#{animal.animalname}
+			</h:column>
+			<h:column>
+			<f:facet name="header">ScientaficName</f:facet>
+			#{animal.scienteficname}
+			</h:column>
+			<h:column>
+			<f:facet name="header">TotalNumber</f:facet>
+			#{animal.totalnumber}
+			</h:column>
+			<h:column>
+			<f:facet name="header">Delete</f:facet>
+			<h:commandButton action="#{animalController.deleteAnimal(animal.animalid)}" value="Delete" />
+			</h:column>
+			
+		</h:dataTable>
+	</h:form>
+</h:body>
+</h:body> 
+</html>
