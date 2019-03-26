@@ -32,8 +32,7 @@ public class AnimalService implements AnimalServiceLocal {
 
 	@Override
 	public void updateAnimal(Animal animal) {
-		// TODO Auto-generated method stub
-		
+		em.merge(animal);
 	}
 
 }

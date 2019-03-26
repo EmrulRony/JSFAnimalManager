@@ -14,7 +14,7 @@ import com.solutionia.model.Animal;
 import com.solutionia.services.AnimalServiceLocal;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class AnimalController implements Serializable {
 	/**
 	 * 
@@ -23,6 +23,7 @@ public class AnimalController implements Serializable {
 	@EJB
 	AnimalServiceLocal animalService;
 	private List<Animal> animalList;
+	private Animal currentAnimal;
 	
 	public AnimalController() {
 		System.out.println("JSF Bean created");
@@ -37,15 +38,30 @@ public class AnimalController implements Serializable {
 	public void setAnimalList(List<Animal> animalList) {
 		this.animalList = animalList;
 	}
+	
+	// This method deletes animal row from animal table
 	public String deleteAnimal(int animalId) {
 		animalService.deleteAnimal(animalId);
 		animalList=animalService.getAnimals();
 		return null;
 	}
+	// This method updates animal table in the database
+	public String modifyAnimal() {
+		animalService.updateAnimal(currentAnimal);
+		animalList=animalService.getAnimals();
+		return null;
+	}
 	
+	public Animal getCurrentAnimal() {
+		return currentAnimal;
+	}
+	public void currentAnimal(Animal currentAnimal) {
+		this.currentAnimal = currentAnimal;
+	}
 	@PreDestroy
 	void destroy() {
 		System.out.println("Bean destroyed!!");
 	}
+
 
 }

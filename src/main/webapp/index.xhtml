@@ -11,25 +11,47 @@
 	<h:form>
 		<h:dataTable value="#{animalController.animalList}" var="animal">
 			<h:column>
-			#{animal.animalid}
-			<f:facet name="header">AnimalId</f:facet>
+			<f:facet name="header">
+			<h:outputText value="AnimalID"/>
+			</f:facet>
+			<h:outputText value="#{animal.animalid}" />
 			</h:column>
+			
 			<h:column>
-			<f:facet name="header">AnimalName</f:facet>
-			#{animal.animalname}
+			<f:facet name="header">
+			<h:outputText value="AnimalName"/>
+			</f:facet>
+			<h:outputText rendered="#{animalController.currentAnimal ne animal}" value="#{animal.animalname}" />
+			<h:inputText rendered="#{animalController.currentAnimal eq animal}" value="#{animal.animalname}" />
 			</h:column>
+			
 			<h:column>
-			<f:facet name="header">ScientaficName</f:facet>
-			#{animal.scienteficname}
+			<f:facet name="header">
+			<h:outputText value="ScienteficName"/>
+			</f:facet>
+			<h:outputText rendered="#{animalController.currentAnimal ne animal}" value="#{animal.scienteficname}" />
+			<h:inputText rendered="#{animalController.currentAnimal eq animal}" value="#{animal.scienteficname}" />
 			</h:column>
+			
 			<h:column>
-			<f:facet name="header">TotalNumber</f:facet>
-			#{animal.totalnumber}
+			<f:facet name="header">
+			<h:outputText value="TotalNumber"/>
+			</f:facet>
+			<h:outputText rendered="#{animalController.currentAnimal ne animal}" value="#{animal.totalnumber}" />
+			<h:inputText rendered="#{animalController.currentAnimal eq animal}" value="#{animal.totalnumber}" />
 			</h:column>
+			
 			<h:column>
 			<f:facet name="header">Delete</f:facet>
 			<h:commandButton action="#{animalController.deleteAnimal(animal.animalid)}" value="Delete" />
 			</h:column>
+			
+			<h:column>
+			<f:facet name="header">Edit</f:facet>
+			<h:commandButton rendered="#{animalController.currentAnimal eq animal}" action="#{animalController.modifyAnimal()}" value="Update" />
+			<h:commandButton rendered="#{animalController.currentAnimal ne animal}" action="#{animalController.currentAnimal(animal)}" value="Edit" />
+			</h:column>
+			
 			
 		</h:dataTable>
 	</h:form>
